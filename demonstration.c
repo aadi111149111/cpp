@@ -1,6 +1,6 @@
-#include <stdio.h>
+#include <stdio.h> //Header file
 
-int scores[3] = { 90, 85, 95 };
+int scores[3] = { 90, 85, 95 }; //Array
 
 int main()
 {
