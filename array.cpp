@@ -41,7 +41,7 @@ bool SimpleArray::insertAtPosition(int index, int value) {
         cout << "Array is full\n";
         return false;
     }
-    if (index < 0 || index > size) {
+    if (index < 0 || index >= size) {
         cout << "Invalid index\n";
         return false;
     }
