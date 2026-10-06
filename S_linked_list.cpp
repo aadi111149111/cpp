@@ -8,11 +8,11 @@ public:
     int data;
     Node* next;
 public:
-    Node(int data1, Node* next1) // To create a node with data and pointer to the next node
-    {
-        data = data1;
-        next = next1;
-    }
+    // Node(int data1, Node* next1) // To create a node with data and pointer to the next node
+    // {
+    //     data = data1;
+    //     next = next1;
+    // }
     Node(int data1) // To create a node with data and a null pointer for the next node
     {
         data = data1;
@@ -32,7 +32,7 @@ void traverse(Node* head) // Done
     cout << endl;
 }
 // To convert an array into a Linked List 
-Node* convertArr2LL(vector<int> &arr)
+Node* convertArr2LL(vector<int> &arr) //Done
 {
     Node* head = new Node(arr[0]);
     Node* mover = head;
@@ -61,11 +61,16 @@ int lengthOfLL(Node* head) // Done
 Node* checkIfPresent(Node* head, int val) // Done
 {
     Node* temp = head;
+    int count = 0;
     while(temp != nullptr)
     {
+        count++;
         if(temp -> data == val)
-            return temp;
-            temp = temp -> next;
+            {
+                cout << "Found value " << val << " at position: " << count << endl;
+                return temp;
+            }
+        temp = temp -> next;
     }
     return 0 ;
 }
@@ -75,11 +80,12 @@ Node* checkIfPresent(Node* head, int val) // Done
 
 Node* removesHead(Node* head)// Done
 {
-    if(head == NULL) // Means if the Linked List is empty
-    {
-        return head;
-    }
     Node* temp = head;
+    if(head == NULL || head->next == nullptr) // Means if the Linked List is empty and next pointer to the head is also null, so that the whole LL doesn't becomeempty5 
+    {
+        return nullptr;
+    }
+
     head = head-> next;
     delete temp;
     return head;
@@ -106,16 +112,13 @@ Node* removesTail(Node* head)//Done
 
 Node* Delete_at_Position_K(Node* head, int k)
 {
-    if (head == NULL)
+    if (head == NULL || head -> next == NULL)
     {
-        return head;
+        return nullptr;
     }
-    if (k == 1)
+    else if (k == 1)
     {
-        Node* temp = head;
-        head = head-> next;
-        delete temp;
-        return head;
+        removesHead(head);
     }
     int count = 0; 
     Node* temp = head;
@@ -197,9 +200,7 @@ Node* insertion_at_kth_position(Node* head, int k)
     cin >> num;
      Node* new_node = new Node(num);
         if (k == 1) {
-            new_node->next = head;
-            head = new_node;
-            return head;
+        insert_at_beginning(head, num);
         }
         int count = 1;
         Node* temp = head;
@@ -220,34 +221,28 @@ Node* insertion_at_kth_position(Node* head, int k)
 int main()
 {
     vector<int> arr = {1,2,3,4,5};
-    Node *y = new Node(arr[0]);
-    int new_val = 0;
-    //Node *y = new Node(arr[0], nullptr);
+    // Node *y = new Node(arr[0]);
+    // int new_val = 0;
+    // Node *y = new Node(arr[0], nullptr);
     // cout << y.data << "\n";
     // cout << y.next;    
-    cout << y->data << "\n";
-    cout << y->next << "\n";
+    // cout << y->data << "\n";
+    // cout << y->next << "\n";
     Node* head = convertArr2LL(arr);
-    Node* temp = head;
-    while(temp != nullptr)
-    {
-        cout << temp-> data << " ";
-        temp = temp -> next;
-    }
     cout << "\n";
     cout << lengthOfLL(head);
     cout << "\n";
     cout << checkIfPresent(head, 5) << endl;
-    //head = removesHead(head);
+    head = removesHead(head);
     // head = removesTail(head);
-    head = Delete_at_Position_K(head, 1);
+    //head = Delete_at_Position_K(head, 1);
     //head = Deletion_by_value(head, 4);
     //Node* new_head = insert_at_beginning(head, new_val);
     //Node* new_tail = insert_at_last(head, new_val);
-    int position;
-    cout << "Enter the position: ";
-    cin >> position;
-    //Node* new_at_k = insertion_at_kth_position(head, position);
+    // int position;
+    // cout << "Enter the position: ";
+    // cin >> position;
+    // Node* new_at_k = insertion_at_kth_position(head, position);
     traverse(head);
     return 0;
 }

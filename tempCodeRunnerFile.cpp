@@ -1,1 +1,6 @@
-    Node y = Node(arr[0], nullptr);
+    Node* temp = head;
+    while(temp != nullptr)
+    {
+        cout << temp-> data << " ";
+        temp = temp -> next;
+    }
